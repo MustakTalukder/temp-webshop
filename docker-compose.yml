@@ -1,0 +1,40 @@
+version: "3.9"
+   
+services:
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    container_name: "webshops_db"
+    environment:
+      MYSQL_DATABASE: webshopdb
+      MYSQL_USER: webshop
+      MYSQL_PASSWORD: webshop
+      MYSQL_ROOT_PASSWORD: webshop
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_volume:/var/lib/mysql
+
+  backend:
+    build: 
+      context: ./backend
+    command: sh -c "python manage.py migrate && gunicorn server.wsgi:application --bind 127.0.0.1:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - staticfiles:/backend/staticfiles
+  nginx:
+    build: 
+      context: .
+      dockerfile: ./webserver/Dockerfile
+    volumes:
+      - staticfiles:/staticfiles
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+volumes:
+  mysql_volume:
+  staticfiles:
