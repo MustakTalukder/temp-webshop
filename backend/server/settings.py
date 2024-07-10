@@ -31,9 +31,9 @@ ALLOWED_HOSTS = ["*"]
 
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost',
-    'http://127.0.0.1',
-    'http://0.0.0.0',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'http://0.0.0.0:8000',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'core.apps.CoreConfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -59,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'server.urls'
@@ -92,7 +95,7 @@ DATABASES = {
         "NAME": "webshopdb",
         "USER": "webshop",
         "PASSWORD": "webshop",
-        "HOST": "127.0.0.1",
+        "HOST": "webshops_db",
         "PORT": "3306",
     }
 }
