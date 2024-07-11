@@ -1,14 +1,21 @@
-FROM node:lts-alpine3.12 as build
+FROM node:alpine3.19 as build
 
 WORKDIR /frontend
+
+COPY ./frontend/.eslintrc.cjs ./
+COPY ./frontend/index.html ./
+COPY ./frontend/jsconfig.json ./
 COPY ./frontend/package.json ./
-COPY ./frontend/yarn.lock ./
-RUN yarn install
+COPY ./frontend/package-lock.json ./
+COPY ./frontend/vercel.json ./
+COPY ./frontend/vite.config.js ./
+
+RUN npm install
 COPY ./frontend/ ./
-RUN yarn build
 
+RUN npm run build
 
-FROM nginx:1.18.0-alpine
+FROM nginx:alpine3.19
 
 COPY ./webserver/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /frontend/build /usr/share/nginx/html
+COPY --from=build /frontend/dist /usr/share/nginx/html
