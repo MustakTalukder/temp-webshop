@@ -80,40 +80,6 @@ export default function SearchPopup() {
             ></button>
           </div>
 
-          <div className="search-popup__results">
-            <div className="sub-menu search-suggestion">
-              <h6 className="sub-menu__title fs-base">Quicklinks</h6>
-              <ul className="sub-menu__list list-unstyled">
-                <li className="sub-menu__item">
-                  <Link to="/shop-2" className="menu-link menu-link_us-s">
-                    New Arrivals
-                  </Link>
-                </li>
-                <li className="sub-menu__item">
-                  <a href="#" className="menu-link menu-link_us-s">
-                    Dresses
-                  </a>
-                </li>
-                <li className="sub-menu__item">
-                  <Link to="/shop-3" className="menu-link menu-link_us-s">
-                    Accessories
-                  </Link>
-                </li>
-                <li className="sub-menu__item">
-                  <a href="#" className="menu-link menu-link_us-s">
-                    Footwear
-                  </a>
-                </li>
-                <li className="sub-menu__item">
-                  <a href="#" className="menu-link menu-link_us-s">
-                    Sweatshirt
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="search-result row row-cols-5"></div>
-          </div>
         </form>
         {/* <!-- /.header-search --> */}
       </div>
